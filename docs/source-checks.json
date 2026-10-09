@@ -1,0 +1,220 @@
+{
+  "checked_at_utc": "2026-10-09T19:53:48.254204+00:00",
+  "probes": [
+    {
+      "name": "chicago_outcomes_2023_2025",
+      "status": 200,
+      "result": [
+        {
+          "results": "Pass",
+          "n": "29520"
+        },
+        {
+          "results": "Fail",
+          "n": "10707"
+        },
+        {
+          "results": "Pass w/ Conditions",
+          "n": "7241"
+        },
+        {
+          "results": "Out of Business",
+          "n": "4026"
+        },
+        {
+          "results": "No Entry",
+          "n": "3956"
+        },
+        {
+          "results": "Not Ready",
+          "n": "1231"
+        },
+        {
+          "results": "Business Not Located",
+          "n": "13"
+        }
+      ],
+      "url": "https://data.cityofchicago.org/resource/4ijn-s7e5.json?%24select=results%2Ccount%28%2A%29+as+n&%24where=inspection_date+%3E%3D+%272023-01-01T00%3A00%3A00%27+AND+inspection_date+%3C+%272026-01-01T00%3A00%3A00%27&%24group=results&%24order=n+DESC",
+      "parameters": {
+        "$select": "results,count(*) as n",
+        "$where": "inspection_date >= '2023-01-01T00:00:00' AND inspection_date < '2026-01-01T00:00:00'",
+        "$group": "results",
+        "$order": "n DESC"
+      }
+    },
+    {
+      "name": "chicago_sample",
+      "status": 200,
+      "rows": 200,
+      "fields": [
+        "facility_type",
+        "inspection_date",
+        "inspection_id",
+        "inspection_type",
+        "latitude",
+        "license_",
+        "longitude",
+        "results",
+        "risk",
+        "zip"
+      ],
+      "missing": {
+        "facility_type": 1,
+        "inspection_date": 0,
+        "inspection_id": 0,
+        "inspection_type": 0,
+        "latitude": 0,
+        "license_": 0,
+        "longitude": 0,
+        "results": 0,
+        "risk": 0,
+        "zip": 0
+      },
+      "outcomes": {
+        "Fail": 12,
+        "No Entry": 29,
+        "Not Ready": 8,
+        "Out of Business": 41,
+        "Pass": 95,
+        "Pass w/ Conditions": 15
+      },
+      "url": "https://data.cityofchicago.org/resource/4ijn-s7e5.json?%24select=inspection_id%2Clicense_%2Cfacility_type%2Crisk%2Cinspection_date%2Cinspection_type%2Cresults%2Czip%2Clatitude%2Clongitude&%24where=inspection_date+%3E%3D+%272023-01-01T00%3A00%3A00%27+AND+inspection_date+%3C+%272026-01-01T00%3A00%3A00%27&%24order=inspection_date+DESC%2Cinspection_id+DESC&%24limit=200",
+      "parameters": {
+        "$select": "inspection_id,license_,facility_type,risk,inspection_date,inspection_type,results,zip,latitude,longitude",
+        "$where": "inspection_date >= '2023-01-01T00:00:00' AND inspection_date < '2026-01-01T00:00:00'",
+        "$order": "inspection_date DESC,inspection_id DESC",
+        "$limit": "200"
+      },
+      "representative_sample": false
+    },
+    {
+      "name": "nyc311_sample",
+      "status": 200,
+      "rows": 200,
+      "fields": [
+        "agency",
+        "borough",
+        "closed_date",
+        "complaint_type",
+        "created_date",
+        "descriptor",
+        "incident_zip",
+        "location_type",
+        "open_data_channel_type",
+        "status",
+        "unique_key"
+      ],
+      "missing": {
+        "agency": 0,
+        "borough": 0,
+        "closed_date": 0,
+        "complaint_type": 0,
+        "created_date": 0,
+        "descriptor": 0,
+        "incident_zip": 0,
+        "location_type": 3,
+        "open_data_channel_type": 0,
+        "status": 0,
+        "unique_key": 0
+      },
+      "complaint_types": [
+        "Abandoned Vehicle",
+        "Blocked Driveway",
+        "Derelict Vehicles",
+        "HEAT/HOT WATER",
+        "Illegal Fireworks",
+        "Illegal Parking",
+        "Lead",
+        "New Tree Request",
+        "Noise",
+        "Noise - Commercial",
+        "Noise - House of Worship",
+        "Noise - Residential",
+        "Noise - Street/Sidewalk",
+        "Noise - Vehicle",
+        "PLUMBING",
+        "Rodent",
+        "UNSANITARY CONDITION"
+      ],
+      "negative_elapsed_dates": 0,
+      "url": "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=unique_key%2Ccreated_date%2Cclosed_date%2Cagency%2Ccomplaint_type%2Cdescriptor%2Cborough%2Cincident_zip%2Clocation_type%2Copen_data_channel_type%2Cstatus&%24where=created_date+%3E%3D+%272025-01-01T00%3A00%3A00%27+AND+created_date+%3C+%272025-02-01T00%3A00%3A00%27+AND+borough+%3D+%27BROOKLYN%27&%24order=created_date+ASC%2Cunique_key+ASC&%24limit=200",
+      "parameters": {
+        "$select": "unique_key,created_date,closed_date,agency,complaint_type,descriptor,borough,incident_zip,location_type,open_data_channel_type,status",
+        "$where": "created_date >= '2025-01-01T00:00:00' AND created_date < '2025-02-01T00:00:00' AND borough = 'BROOKLYN'",
+        "$order": "created_date ASC,unique_key ASC",
+        "$limit": "200"
+      },
+      "representative_sample": false
+    }
+  ],
+  "date_for_project_plan": "2026-10-09",
+  "scope": "Access and feasibility checks only; no complete modeling dataset, no random-sample quality estimate, no predictive validation.",
+  "metadata": {
+    "chicago": {
+      "title": "Food Inspections",
+      "url": "https://data.cityofchicago.org/api/views/4ijn-s7e5.json",
+      "http_status": 200
+    },
+    "nyc311": {
+      "title": "311 Service Requests from 2020 to Present",
+      "url": "https://data.cityofnewyork.us/api/views/erm2-nwe9.json",
+      "http_status": 200
+    }
+  },
+  "chicago_proposed_cohort": {
+    "url": "https://data.cityofchicago.org/resource/4ijn-s7e5.json?%24select=results%2Ccount%28%2A%29+as+n&%24where=inspection_date+%3E%3D+%272023-01-01T00%3A00%3A00%27+AND+inspection_date+%3C+%272026-01-01T00%3A00%3A00%27+AND+facility_type+%3D+%27Restaurant%27+AND+inspection_type+%3D+%27Canvass%27&%24group=results&%24order=n+DESC",
+    "rows_by_outcome": [
+      {
+        "results": "Pass",
+        "n": "9355"
+      },
+      {
+        "results": "Fail",
+        "n": "4193"
+      },
+      {
+        "results": "Pass w/ Conditions",
+        "n": "3452"
+      },
+      {
+        "results": "Out of Business",
+        "n": "2766"
+      },
+      {
+        "results": "No Entry",
+        "n": "96"
+      },
+      {
+        "results": "Not Ready",
+        "n": "2"
+      },
+      {
+        "results": "Business Not Located",
+        "n": "2"
+      }
+    ],
+    "eligible_evaluated_inspections": 17000,
+    "fail_count": 4193,
+    "fail_rate": 0.2466470588235294,
+    "cohort": "Restaurant, routine Canvass inspections, 2023-2025; target excludes non-evaluated administrative outcomes"
+  },
+  "weather_access": {
+    "http_status": 200,
+    "days": 7,
+    "variables": [
+      "time",
+      "temperature_2m_max",
+      "temperature_2m_min",
+      "precipitation_sum",
+      "wind_speed_10m_max"
+    ],
+    "units": {
+      "time": "iso8601",
+      "temperature_2m_max": "°C",
+      "temperature_2m_min": "°C",
+      "precipitation_sum": "mm",
+      "wind_speed_10m_max": "km/h"
+    },
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=41.824&longitude=-71.413&start_date=2025-01-01&end_date=2025-01-07&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&timezone=America%2FNew_York&models=era5"
+  }
+}
