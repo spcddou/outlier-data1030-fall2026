@@ -1,3 +1,5 @@
+> Archived October 9 planning. On October 14 the team selected U.S. state unemployment forecasting. See the current README and docs/plans/2026-10-14-bls-pipeline.md. Earlier candidate/status statements below describe that earlier date.
+
 # outlier 的三个数据选题候选
 
 2026-10-09 核查。**下面都是候选，没有一个已被小组选定。**实际 API 查询与字段检查摘要见 [source-checks.json](source-checks.json)。API 访问通过仅证明当前可获取这些字段；完整清洗、采集脚本和预测效果尚未验证。

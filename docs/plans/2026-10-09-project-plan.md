@@ -1,3 +1,5 @@
+> Archived October 9 planning. On October 14 the team selected U.S. state unemployment forecasting. See the current README and docs/plans/2026-10-14-bls-pipeline.md. Earlier candidate/status statements below describe that earlier date.
+
 # outlier 工作大纲：从选题到 midterm report
 
 日期：2026-10-09。队名：outlier。主题、研究问题、成员分工与 TA mentor 尚未确认。
