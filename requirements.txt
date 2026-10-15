@@ -1,6 +1,0 @@
-# Executed with Python 3.11.15. Jupyter is optional for the walkthrough UI.
-numpy==2.4.4
-pandas==3.0.2
-scikit-learn==1.9.0
-matplotlib==3.11.0
-joblib==1.5.3
