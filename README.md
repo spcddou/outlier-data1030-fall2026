@@ -1,59 +1,79 @@
 # Outlier — DATA1030 Group Project, Fall 2026
 
-Team: **outlier**. Course: DATA1030 Hands-on Data Science, Brown University.
+We study whether a state's recent unemployment history can predict its unemployment rate **three reference months ahead**.
 
-**Status:** topic selection and project planning. No topic has been selected, no full modeling dataset has been collected, and no model has been trained. Team member GitHub usernames and TA mentor are still to be recorded.
+## What we have done
 
-## Start here
+Start with [the main notebook](src/unemployment_linear_regression.ipynb). It includes code, saved results, and three inline EDA plots.
 
-- [Action plan / 工作大纲](docs/plans/2026-10-09-project-plan.md)
-- [Dataset options / 数据选题比较](docs/dataset-options.md)
-- [Midterm report outline / 报告提纲](report/outline.md)
-- [Data documentation template](data/data-dictionary-template.md)
-- [Source access checks](docs/source-checks.json)
+- **Collection:** six BLS Public Data API requests for seasonally adjusted monthly unemployment rates, covering 50 states + DC, January 2014–December 2024 (6,732 state-month observations).
+- **Preparation:** check monthly coverage, duplicates, and valid rates; create lagged features and a three-month-ahead target (5,967 complete labeled rows).
+- **Features:** current unemployment rate, rates 1/3/6/12 months earlier, and state identity. One-hot encoding gives 55 input columns. Dates and the future target are excluded from predictors.
+- **EDA:** state trends, current versus future rates, and target distributions across time periods.
+- **Model:** one ordinary `sklearn.linear_model.LinearRegression`, without tuning. Train on January 2015–September 2021 origins (4,131 rows); test on January 2022–September 2024 origins (1,683 rows). Exclude October–December 2021 origins because their targets cross into 2022.
+- **Saved test results:** MAE **0.772 percentage points**, RMSE **0.854 percentage points**, R² **−0.164**. These are exploratory results; the model currently performs poorly. Negative R² means more squared error than using the observed test-set mean as a constant prediction.
 
-## Course requirements
+BLS historical values are revised. We have not reconstructed original release vintages, and the test period has already been viewed. Month `t` is generally released in the following month, so this is a retrospective reference-month forecasting exercise, not a verified real-time forecast.
 
-The group project is 35% of the course grade: 10 percentage points for the midterm report and 25 for the final presentation. The midterm report is due **October 25, 2026, at 5 pm on Gradescope**, with no grace period. The current rubric schedules final presentations during the week of December 7; presentation details are expected in early November.
+## Run with the data1030 environment
 
-The project must use a dataset collected through an API, web scraping, PDF extraction, or another method requiring coding effort. Direct use of ready-to-download Kaggle/UCI/data-repository datasets is not accepted. Document the actual collection procedure and keep the source and query details.
+1. Clone the repository (or run `git pull` inside an existing clone):
 
-The midterm report has a maximum of 1,500 words, including figure/table captions but excluding references and appendix. It needs at least three explanatory visualizations and the prescribed sections. The report must be written by the team; the rubric permits LLM assistance for grammatical errors and typos, and prohibits LLM-written report text.
+   ```bash
+   git clone https://github.com/spcddou/outlier-data1030-fall2026.git
+   cd outlier-data1030-fall2026
+   ```
 
-These files provide planning and an outline. They do not contain a submission-ready report.
+2. Use your existing course environment:
 
-## Repository layout
+   ```bash
+   conda activate data1030
+   python -c "import sys; print(sys.executable); print(sys.prefix)"
+   ```
 
-```text
-data/       raw and processed data; data documentation
-figures/    generated figures
-results/    predictions, fitted models, and other analytical results
-report/     midterm PDF and final presentation slides
-src/        collection, preparation, EDA, and modeling code/notebooks
-docs/       project planning and source feasibility checks
-.gitignore
-LICENSE
-README.md
-environment.yml
-```
+   Both paths should point to `data1030`. If you do not have the environment yet, create it from the repository root with `conda env create -f environment.yml`, then activate it.
 
-Large datasets can remain outside GitHub if the README gives an official source and exact collection/reproduction instructions. Add all team members as collaborators once their GitHub usernames are known. Do not commit credentials or unrelated personal files.
+3. Register the kernel if it is not listed:
 
-## Environment and reproduction status
+   ```bash
+   python -m ipykernel install --user --name data1030 --display-name "Python (data1030)"
+   ```
 
-`environment.yml` is copied from the course's current [data1030.yml](https://github.com/BrownDSI/DATA1030-fall2026/blob/main/data1030.yml), checked on October 9, 2026. The machine-specific `prefix` has been removed. Its specified versions include Python 3.14.6, NumPy 2.4.6, pandas 3.0.3, matplotlib 3.11.0, and scikit-learn 1.9.0; see the file for the complete specification.
+4. Launch Jupyter **from `src/`**, because the notebook uses its working directory for input/output:
 
-The course environment has **not** been installed or verified in this checkout. Reuse your working course environment, or create the declared environment locally if needed. Update this section to the versions actually used when collection and analysis are implemented.
+   ```bash
+   cd src
+   python -m jupyter notebook unemployment_linear_regression.ipynb
+   ```
 
-There is no analysis run command yet. Small source feasibility checks used Python 3.11.15 and the standard library (`urllib`, `json`); they verified access and basic field availability, not dataset-wide quality or predictive performance. Their summaries and query URLs are in `docs/source-checks.json`.
+5. Select **Python (data1030)** and run all cells from top to bottom. In VS Code, open the notebook, select that same kernel, and ensure the working directory is `src/`. The first cell checks the environment and directory.
 
-## License and sources
+The recorded run used Python 3.14.6, NumPy 2.4.6, pandas 3.0.3, scikit-learn 1.9.0, and matplotlib 3.11.0. `environment.yml` contains the broader course environment; only ordinary linear regression is used here.
 
-The MIT license applies to original project code and documentation. External data and third-party materials retain their original terms and attribution requirements.
+### Data and outputs
 
-- [Canvas syllabus](https://canvas.brown.edu/courses/1103554)
-- [Official Fall 2026 midterm rubric](https://docs.google.com/document/d/1kC3cgE-CPUVmveWHdKAqlbnaq2XMNKjzY9ifF6M97ps/edit)
-- [EdStem rubric announcement](https://edstem.org/us/courses/104806/discussion/8310956)
-- [EdStem finalized team announcement](https://edstem.org/us/courses/104806/discussion/8358533)
+- No API key is required. A first run needs internet access and sends six requests to the [BLS API](https://www.bls.gov/developers/api_signature.htm).
+- The notebook saves responses to `src/raw/batch_01.json` through `batch_06.json` and reuses them on later runs.
+- It writes `state_month_unemployment.csv`, `model_data.csv`, `test_predictions.csv`, and `metrics.json` inside `src/`. Plots display inline with `plt.show()`.
+- Raw responses and CSVs are not currently included in this repository. Fresh API data may have revisions, so rerun results may differ from the saved notebook output. Keep the same raw responses when comparing results.
+- Earlier planning files under `docs/` and `report/outline.md` are historical scaffolding. The notebook describes the implemented analysis. Reports and the separate teammate handoff have not been uploaded.
 
-Planning and repository setup were assisted by OpenAI Codex. The team owns the topic choice, collection implementation, interpretation, and submitted report.
+## Join the repository
+
+Anyone can read or clone this public repository. To push changes, teammates need collaborator access:
+
+1. Send your GitHub username to the repository owner, **spcddou**.
+2. The owner opens [Settings → Collaborators](https://github.com/spcddou/outlier-data1030-fall2026/settings/access), clicks **Add people**, selects your account, and sends an invitation.
+3. Accept the invitation through GitHub or the invitation email. Cloning alone does not grant write access.
+
+See [GitHub's collaborator instructions](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository).
+
+For contributions, pull the latest `main`, work on your own branch, and open a pull request so teammates can review changes. Coordinate before editing the same notebook, and stage only the files you intend to share.
+
+## Sources and license
+
+- [BLS Local Area Unemployment Statistics](https://www.bls.gov/lau/)
+- [BLS API documentation](https://www.bls.gov/developers/api_signature.htm)
+- [BLS methods and revisions](https://www.bls.gov/news.release/laus.tn.htm)
+
+The MIT license applies to original project code and documentation. External data retain their original terms. Code and documentation were prepared with OpenAI Codex assistance; the team is responsible for checking and understanding the work.
