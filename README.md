@@ -41,7 +41,7 @@ BLS historical values are revised. We have not reconstructed original release vi
    python -m ipykernel install --user --name data1030 --display-name "Python (data1030)"
    ```
 
-4. Launch Jupyter **from `src/`**, because the notebook uses its working directory for input/output:
+4. Launch Jupyter **from `src/`**, because the notebook checks its working directory and uses the sibling `data/` folder for input/output:
 
    ```bash
    cd src
@@ -55,8 +55,8 @@ The recorded run used Python 3.14.6, NumPy 2.4.6, pandas 3.0.3, and matplotlib 3
 ### Data and outputs
 
 - No API key is required. The included cache allows offline reruns. If the cache is absent, the notebook needs internet access and sends six requests to the [BLS API](https://www.bls.gov/developers/api_signature.htm).
-- The notebook saves responses to `src/raw/batch_01.json` through `batch_06.json` and reuses them on later runs.
-- It writes `state_month_unemployment.csv` and `eda_pairs.csv` inside `src/`. Plots display inline with `plt.show()`.
+- The notebook saves responses to `data/raw/batch_01.json` through `batch_06.json` and reuses them on later runs.
+- It writes `state_month_unemployment.csv` and `eda_pairs.csv` inside `data/`. Plots display inline with `plt.show()`.
 - Raw API responses are included in the repository and reused by the notebook to ensure reproducibility when the BLS API is temporarily unavailable. Generated CSV files may be recreated by running the notebook.
 
 ## Join the repository

@@ -2,7 +2,7 @@
 
 ## Source panel
 
-`src/state_month_unemployment.csv`: 6,732 rows, 3 columns; 50 states and DC, January 2014–December 2024.
+`data/state_month_unemployment.csv`: 6,732 rows, 3 columns; 50 states and DC, January 2014–December 2024.
 
 | Column | Type | Meaning and unit |
 |---|---|---|
@@ -12,7 +12,7 @@
 
 ## EDA pairs
 
-`src/eda_pairs.csv`: 5,967 rows, 5 columns; origins January 2015–September 2024. The three source-panel columns retain the definitions above.
+`data/eda_pairs.csv`: 5,967 rows, 5 columns; origins January 2015–September 2024. The three source-panel columns retain the definitions above.
 
 | Additional column | Type | Meaning and unit |
 |---|---|---|
@@ -80,4 +80,4 @@ Rows are aligned to a complete monthly calendar within each area before shifting
 
 ## Data versions
 
-The raw JSON files in `src/raw/` preserve BLS API requests, responses, and UTC collection timestamps. Values are revised historical estimates, not reconstructed first-release vintages. Reference month and publication date differ; a month's value is generally released in the following month. EDA does not establish real-time information availability or forecasting performance.
+The raw JSON files in `data/raw/` preserve BLS API requests, responses, and UTC collection timestamps. Values are revised historical estimates, not reconstructed first-release vintages. Reference month and publication date differ; a month's value is generally released in the following month. EDA does not establish real-time information availability or forecasting performance.
