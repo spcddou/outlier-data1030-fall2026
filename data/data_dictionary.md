@@ -18,9 +18,9 @@ Updated October 24, 2026. This document describes the saved data used by the pro
 |---|---:|---:|---|
 | `state_month_unemployment.csv` | 6,732 | 3 | API observations organized into an area-month panel. |
 | `model_data.csv` | 5,967 | 9 | Complete labeled rows with current/historical predictors and the future outcome. Origins cover January 2015–September 2024. |
-| `test_predictions.csv` | 1,683 | 6 | Test identifiers, current rate, actual future rate, and OLS predictions. Origins cover January 2022–September 2024. |
+| `test_predictions.csv` | 1,683 | 7 | Test identifiers, current rate, actual future rate, and OLS predictions. Origins cover January 2022–September 2024. |
 
-The table below documents the union of all columns in these files. The raw panel uses `state_code`, `month`, and `unemployment_rate`. The modeling table uses all listed columns except `linear_regression_prediction`. The prediction file uses `state_code`, `month`, `target_month`, `unemployment_rate`, `target_unemployment_rate`, and `linear_regression_prediction`.
+The table below documents the union of all columns in these files. The raw panel uses `state_code`, `month`, and `unemployment_rate`. The modeling table uses all listed columns except `linear_regression_prediction`. The prediction file uses `state_code`, `month`, `target_month`, `unemployment_rate`, `target_unemployment_rate`, `linear_regression_prediction`, and `persistence_prediction`.
 
 ## Column definitions
 
@@ -38,6 +38,7 @@ Here, `u_s(t)` denotes area `s`'s unemployment rate for reference month `t`.
 | `target_unemployment_rate` | Continuous; floating-point number | Percent | Same area's actual rate three calendar months later, `u_s(t+3)`. | Supervised-learning target and evaluation outcome; never a predictor. |
 | `target_month` | Temporal metadata; string in `YYYY-MM` format | Calendar month | Origin month plus three calendar months. For example, origin `2022-01` has target month `2022-04`. | Label metadata and split eligibility check; excluded from model inputs. |
 | `linear_regression_prediction` | Continuous; floating-point number | Percent | Rate predicted by the fitted `sklearn.linear_model.LinearRegression` for a test row. The model does not clip predictions to the 0–100 range. | Model output for comparison with the target; never a predictor. |
+| `persistence_prediction` | Continuous; floating-point number | Percent | Persistence benchmark prediction, set equal to the current unemployment rate `u_s(t)`. | Benchmark output for comparison with the target and linear regression prediction; never a predictor. |
 
 Lag columns contain historical **levels**, not differences, percentage changes, or rolling averages. For example, `lag_3m = 7.1` means a rate of 7.1% three months earlier.
 
