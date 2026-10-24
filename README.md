@@ -4,12 +4,16 @@ We study whether a state's recent unemployment history can predict its unemploym
 
 ## What we have done
 
-Start with [the main notebook](src/unemployment_linear_regression.ipynb). It includes code, saved results, and three inline EDA plots.
+Start with [the main notebook](src/unemployment_linear_regression.ipynb). It includes code, saved results, and four inline EDA plots.
+
+- English report: [PDF](report/data1030_report_outlier_updated.pdf) · [Word](report/data1030_report_outlier_updated.docx)
+- [Data dictionary](data/data_dictionary.md): column definitions, units, all 51 area codes, and encoding rules.
+- [Report figures](figures/): the four images embedded in the report.
 
 - **Collection:** six BLS Public Data API requests for seasonally adjusted monthly unemployment rates, covering 50 states + DC, January 2014–December 2024 (6,732 state-month observations).
 - **Preparation:** check monthly coverage, duplicates, and valid rates; create lagged features and a three-month-ahead target (5,967 complete labeled rows).
 - **Features:** current unemployment rate, rates 1/3/6/12 months earlier, and state identity. One-hot encoding gives 55 input columns. Dates and the future target are excluded from predictors.
-- **EDA:** state trends, current versus future rates, and target distributions across time periods.
+- **EDA:** state trends, current versus future rates, target distributions across time periods, and training-period autocorrelation for all 50 states and DC. Figure 4 shows each area separately and the median across areas at each lag.
 - **Model:** one ordinary `sklearn.linear_model.LinearRegression`, without tuning. Train on January 2015–September 2021 origins (4,131 rows); test on January 2022–September 2024 origins (1,683 rows). Exclude October–December 2021 origins because their targets cross into 2022.
 - **Saved test results:** MAE **0.772 percentage points**, RMSE **0.854 percentage points**, R² **−0.164**. These are exploratory results; the model currently performs poorly. Negative R² means more squared error than using the observed test-set mean as a constant prediction.
 
@@ -56,7 +60,7 @@ The recorded run used Python 3.14.6, NumPy 2.4.6, pandas 3.0.3, scikit-learn 1.9
 - The notebook saves responses to `src/raw/batch_01.json` through `batch_06.json` and reuses them on later runs.
 - It writes `state_month_unemployment.csv`, `model_data.csv`, `test_predictions.csv`, and `metrics.json` inside `src/`. Plots display inline with `plt.show()`.
 - Raw responses and CSVs are not currently included in this repository. Fresh API data may have revisions, so rerun results may differ from the saved notebook output. Keep the same raw responses when comparing results.
-- Earlier planning files under `docs/` and `report/outline.md` are historical scaffolding. The notebook describes the implemented analysis. Reports and the separate teammate handoff have not been uploaded.
+- Earlier planning files under `docs/` and `report/outline.md` are historical scaffolding. Use the notebook and linked English report for the implemented analysis. The teammate handoff remains a separate attachment outside this repository.
 
 ## Join the repository
 
