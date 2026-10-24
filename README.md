@@ -6,7 +6,7 @@ We study whether a state's recent unemployment history can predict its unemploym
 
 Start with [the main notebook](src/unemployment_linear_regression.ipynb). It includes code, saved results, and four inline EDA plots.
 
-- English report: [PDF](report/data1030_report_outlier_updated.pdf) · [Word](report/data1030_report_outlier_updated.docx)
+- English report: [PDF](report/data1030_report_outlier.pdf) · [Word](report/data1030_report_outlier.docx)
 - [Data dictionary](data/data_dictionary.md): column definitions, units, all 51 area codes, and encoding rules.
 - [Report figures](figures/): the four images embedded in the report.
 
