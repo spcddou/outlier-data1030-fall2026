@@ -79,4 +79,4 @@ For contributions, pull the latest `main`, work on your own branch, and open a p
 - [BLS API documentation](https://www.bls.gov/developers/api_signature.htm)
 - [BLS methods and revisions](https://www.bls.gov/news.release/laus.tn.htm)
 
-The MIT license applies to original project code and documentation. External data retain their original terms. Code and documentation were prepared with OpenAI Codex assistance; the team is responsible for checking and understanding the work.
+OpenAI ChatGPT was used to review and revise portions of the report, including grammar, wording, reasoning, references, and formatting. It was also used to suggest possible next steps for the analysis and troubleshoot HTTP 503 errors encountered while using GitHub and JupyterLab. The relevant AI interaction records are provided in Appendix B of the report.
