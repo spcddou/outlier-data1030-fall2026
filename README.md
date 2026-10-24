@@ -59,7 +59,7 @@ The recorded run used Python 3.14.6, NumPy 2.4.6, pandas 3.0.3, scikit-learn 1.9
 - No API key is required. A first run needs internet access and sends six requests to the [BLS API](https://www.bls.gov/developers/api_signature.htm).
 - The notebook saves responses to `src/raw/batch_01.json` through `batch_06.json` and reuses them on later runs.
 - It writes `state_month_unemployment.csv`, `model_data.csv`, `test_predictions.csv`, and `metrics.json` inside `src/`. Plots display inline with `plt.show()`.
-- Raw responses and CSVs are not currently included in this repository. Fresh API data may have revisions, so rerun results may differ from the saved notebook output. Keep the same raw responses when comparing results.
+- Raw API responses are included in the repository and reused by the notebook to ensure reproducibility when the BLS API is temporarily unavailable. Generated CSV files may be recreated by running the notebook.
 - Earlier planning files under `docs/` and `report/outline.md` are historical scaffolding. Use the notebook and linked English report for the implemented analysis. The teammate handoff remains a separate attachment outside this repository.
 
 ## Join the repository
